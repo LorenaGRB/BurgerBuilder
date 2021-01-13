@@ -13,7 +13,6 @@ const INGREDIENT_PRICES= {
 }
 
 class BurgerBuilder extends Component {
-
     state = {
         ingredients : {
             bacon: 0,
@@ -35,15 +34,14 @@ class BurgerBuilder extends Component {
             },0);
         this.setState({purchasable: sum>0 })
     }
-
     addIngredientHandler = (type) => {
-        const oldCount = this.state.ingredients [ type ];
+        const oldCount = this.state.ingredients[type];
         const updatedCount = oldCount + 1;
         const updatedIngredients = {
             ...this.state.ingredients
         };
-        updatedIngredients[ type ] = updatedCount;
-        const priceAddition = INGREDIENT_PRICES [type];
+        updatedIngredients[type] = updatedCount;
+        const priceAddition = INGREDIENT_PRICES[type];
         const oldPrice = this.state.totalPrice;
         const newPrice = oldPrice + priceAddition;
         this.setState ({totalPrice: newPrice , ingredients: updatedIngredients});
@@ -52,9 +50,8 @@ class BurgerBuilder extends Component {
     purchaseCancelHandler = () => {
         this.setState({purchasingToSeeModal: false});
     }
-
     removeIngredientHandler = (type) => {
-        const oldCount = this.state.ingredients [ type ];
+        const oldCount = this.state.ingredients[type];
         if(oldCount <= 0){
             return;
         }
@@ -63,7 +60,7 @@ class BurgerBuilder extends Component {
             ...this.state.ingredients
         };
         updatedIngredients[ type ] = updatedCount;
-        const priceDeduction = INGREDIENT_PRICES [type];
+        const priceDeduction = INGREDIENT_PRICES[type];
         const oldPrice = this.state.totalPrice;
         const newPrice = oldPrice - priceDeduction;
         this.setState ({totalPrice: newPrice , ingredients: updatedIngredients});
@@ -72,7 +69,6 @@ class BurgerBuilder extends Component {
     purchaseHandler = () => {
         this.setState({purchasingToSeeModal: true});
     }
-
     purchaseContinueHandler = () => {
         alert('You continue');
     }
@@ -81,7 +77,7 @@ class BurgerBuilder extends Component {
             ...this.state.ingredients
         };
         for (let key in disabledInfo) {
-            disabledInfo [key] = disabledInfo[key] <= 0 
+            disabledInfo[key] = disabledInfo[key] <= 0 
             //llenamos el objeto con false or true ej: {salad:false,cheese:true, bacon:false,meat: true} dependiendo si son menores a cero las cantidades.
         }
         return(
