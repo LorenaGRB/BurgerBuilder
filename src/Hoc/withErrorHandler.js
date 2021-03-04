@@ -19,23 +19,12 @@ const withErrorHandler = (WrappedComponent, axios) => {
             });
             this.setState({ initialized: true });
         }
-        // state = {
-        //     error: null
-        // }
-        // componentWilldMount (){
-        //     axios.interceptors.request.use(req =>{
-        //         this.setState({error: null});
-        //         return req;
-        //     })
-        //     axios.interceptors.response.use(res => res, error=>{
-        //         this.setState({error: error});
-        //     });
-        // }
-
-        // errorConfirmedHandler = () => {
-        //     this.setState({error: null})
-        // }
-
+        //This is a lifecycle method which is executed at the point of time a component isnt required anymore
+        //Now to be able to remove an interceptor here, we need to store a reference to the interceptors we create in properties of this class.
+        componentWillUnmount(){//removemos los interceptor cuando no se usan
+            axios.interceptors.request.eject(this.requestInterceptor);
+            axios.interceptors.response.eject(this.responseInterceptor);
+        }
         render(){
             const { initialized } = this.state;
             if (!initialized) return null;
