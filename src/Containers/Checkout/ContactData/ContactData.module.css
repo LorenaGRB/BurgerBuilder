@@ -1,0 +1,40 @@
+.ContactData{
+    display: block;
+    margin: 20px auto;
+    width: 80%;
+    box-shadow: 0 3px 3px #bbbaba;
+    border: 1PX SOLID #b9b9b9;
+    padding: 10px;
+    box-sizing: border-box;
+}
+.Container{
+    display: flex;
+}
+form{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    color: #b9b9b9;
+}
+input{
+    height: 30px;
+    width: 100px;
+    border: 1px solid gray;
+    border-radius: 5px;
+    margin: 10px;
+    padding-left: 10px;
+}
+.large{
+    width: 200px;
+}
+h4{
+    display: flex;
+    justify-content: center;
+    font-weight: 600;
+}
+@media(min-width:600px){
+    .ContactData{
+        width: 500px;
+    }
+}
