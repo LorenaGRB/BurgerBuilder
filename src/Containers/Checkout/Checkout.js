@@ -5,22 +5,23 @@ import ContactData from './ContactData/ContactData';
 
 class Checkout extends Component {
     state = {
-        ingredients: {
-            salad: 1,
-            meat: 1,
-            cheese: 1,
-            bacon: 1
-        }
+        ingredients: null,
+        price: 0
     }
     
-componentDidMount() {
+componentWillMount() {
     const query = new URLSearchParams( this.props.location.search );
     const ingredients = {};
+    let price = false;
     for (let param of query.entries()){
         //param = ['salad','1'] 
-        ingredients[param[0]] = +param[1];
+        if ( param[0] == 'price' ){
+            price = param[1];//guardamos el total price en price
+        }else{
+            ingredients[param[0]] = +param[1];
+        }
     }
-    this.setState({ingredients: ingredients});
+    this.setState({ingredients: ingredients, totalPrice: price});
 }
 
     onCheckoutCancelledHandler = () => {
@@ -38,7 +39,10 @@ componentDidMount() {
                 />
                 <Route 
                 path={ this.props.match.path + '/contact-data' }
-                component={ContactData}/>
+                // component={ContactData} Se usara el metodo render para poder pasar los ingredientes y el precio por medio de props
+                //para que el push en history en contact data funcione se pasan props y asi despues de que se cargen los datos al firebase la pagina regrese al inicio.
+                render={ (props) => (<ContactData  ingredients={ this.state.ingredients } price={ this.state.totalPrice } {...props}/>) }
+                />
             </div>
         )
     }
