@@ -41,7 +41,7 @@ componentWillMount() {
                 path={ this.props.match.path + '/contact-data' }
                 // component={ContactData} Se usara el metodo render para poder pasar los ingredientes y el precio por medio de props
                 //para que el push en history en contact data funcione se pasan props y asi despues de que se cargen los datos al firebase la pagina regrese al inicio.
-                render={ (props) => (<ContactData  ingredients={ this.state.ingredients } price={ this.state.totalPrice } {...props}/>) }
+                render={ (props) => (<ContactData  ingredients={ this.state.ingredients } totalPrice={ this.state.totalPrice } {...props}/>) }
                 />
             </div>
         )
